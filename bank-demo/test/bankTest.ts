@@ -43,3 +43,13 @@ Assert.shouldError(badWithdrawNonExistentAccountFunc, "Withdraw - scenario 3");
 // current account balance is 5450, so 5500 is too large of a withdrawal and should error
 const badWithdrawTooLargeFunc = () => bank.withdraw(acc.accountNumber, 5500);
 Assert.shouldError(badWithdrawTooLargeFunc, "Withdraw - scenario 4");
+
+
+
+// Check account balance: scenario 1
+const balanceCheckBalance = bank.checkAccountBalance(acc.accountNumber);
+Assert.equal(balanceCheckBalance, 5450, "Check account balance - scenario 1");
+
+// Check account balance: scenario 2
+const badCheckAccountBalanceNonExistentAccountFunc = () => bank.checkAccountBalance("foobar");
+Assert.shouldError(badCheckAccountBalanceNonExistentAccountFunc, "Check account balance - scenario 2");
