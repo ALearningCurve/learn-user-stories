@@ -56,7 +56,7 @@ export default class Bank {
      * This method deposits a given amount into a bank account
      * @param {string} accountNumber The account number to deposit into
      * @param {number} amount The amount of money to deposit
-     * @returns The new balance 
+     * @returns The new balance of the account
      */
     public deposit(accountNumber: string, amount: number): number {
         if (amount < 0) {
@@ -64,6 +64,24 @@ export default class Bank {
         }
         const account = this.requireAccount(accountNumber);
         account.balance += amount;
+        return account.balance;
+    }
+
+    /**
+     * This method withdraws a given amount from a bank account
+     * @param {string} accountNumber The account number to withdraw from 
+     * @param {number} amount The amount of money to withdraw 
+     * @returns The new balance of the account
+     */
+    public withdraw(accountNumber: string, amount: number): number {
+        if (amount < 0) {
+            throw new Error("Cannot withdraw a negative amount!");
+        }
+        const account = this.requireAccount(accountNumber);
+        if (account.balance < amount) {
+            throw new Error("Cannot withdraw more than your account balance!");
+        }
+        account.balance -= amount;
         return account.balance;
     }
 }
